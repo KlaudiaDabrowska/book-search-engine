@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import { StyledLabel, StyledInput, StyledForm, StyledButton } from '../../styles/Form.styles';
 import { useFormik } from 'formik';
 import { Form } from 'react-bootstrap';
 
-export const SearchBookForm = () => {
+interface SearchBookFormProps {
+  query: string;
+  setQuery: Dispatch<SetStateAction<string>>;
+}
+
+export const SearchBookForm = ({ query, setQuery }: SearchBookFormProps) => {
   const formik = useFormik({
     initialValues: {
       title: '',
@@ -15,8 +20,7 @@ export const SearchBookForm = () => {
 
     // }),
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
-
+      setQuery(values.title);
       formik.resetForm();
     },
   });
