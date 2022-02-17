@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 
+interface ImageProps {
+  src: string;
+}
+
 export const WrapperLi = styled.li`
   display: grid;
   grid-template-columns: 0.6fr 1.4fr 1fr;
@@ -36,13 +40,16 @@ export const Description = styled.div`
   }
 `;
 
-export const Image = styled.div`
-  width: 120px;
-  height: 120px;
+export const Image = styled.div<ImageProps>`
+  width: 128px;
+  height: 180px;
   grid-area: image;
   align-self: center;
   justify-content: center;
-  background-color: black;
+  background-image: ${({ src }) => `url(${src})`};
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
   margin-left: ${({ theme }) => theme.spacing.l};
   margin-right: ${({ theme }) => theme.spacing.s};
 
