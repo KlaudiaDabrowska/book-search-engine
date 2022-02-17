@@ -1,34 +1,26 @@
 import React from 'react';
-import { useBooks } from '../../services/useBooks';
+import { UseQueryResult } from 'react-query';
 import { Author, Description, Image, Title, WrapperLi } from '../../styles/SearchResultsItem.styles';
 import { Wrapper } from '../../styles/SearchResultsList.styles';
-import { Book } from '../../types/Book';
+import { Book, BooksResponse } from '../../types/Book';
 import { SearchResultsItem } from './SearchResultsItem';
 
 interface SearchResultListProp {
-  // searchResult: Book[] | undefined;
-  searchTitle: string;
-  searchAuthor: string;
-  isLoading: boolean;
-  // errorMessage: string | undefined;
+  booksQuery: UseQueryResult<BooksResponse, unknown>;
 }
 
-export const SearchResultsList = ({ searchTitle, searchAuthor, isLoading }: SearchResultListProp) => {
-  const booksQuery = useBooks({ intitle: searchTitle, inauthor: searchAuthor });
-
-  if (isLoading) {
+export const SearchResultsList = ({ booksQuery }: SearchResultListProp) => {
+  if (booksQuery.isLoading) {
     return <span>Loading..</span>;
   }
-
-  console.log(booksQuery);
-  // console.log(booksQuery.data?.items);
-  console.log(searchTitle);
 
   return (
     <Wrapper>
       {(booksQuery.data?.items ?? []).map((book) => (
         <SearchResultsItem item={book} index={book.id} />
       ))}
+
+      {/* {searchTitle != '' ? (booksQuery.data?.items ?? []).map((book) => <SearchResultsItem item={book} index={book.id} />) : <div>"hehe</div>} */}
       {/* <Image />
         <Title>The Shining</Title>
         <Author>Stephan King</Author>

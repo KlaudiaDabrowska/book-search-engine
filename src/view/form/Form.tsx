@@ -1,31 +1,28 @@
-import React, { Dispatch, SetStateAction } from 'react';
+import React, { Dispatch, SetStateAction, useEffect } from 'react';
 import { StyledLabel, StyledInput, StyledForm, StyledButton } from '../../styles/Form.styles';
 import { useFormik } from 'formik';
 import { Form } from 'react-bootstrap';
 
 interface SearchBookFormProps {
-  setQueryTitle: Dispatch<SetStateAction<string>>;
-  setQueryAuthor: Dispatch<SetStateAction<string>>;
+  setQueryTitle: Dispatch<SetStateAction<string | undefined>>;
+  setQueryAuthor: Dispatch<SetStateAction<string | undefined>>;
 }
 
 export const SearchBookForm = ({ setQueryAuthor, setQueryTitle }: SearchBookFormProps) => {
   const formik = useFormik({
     initialValues: {
-      title: '',
-      author: '',
+      title: undefined,
+      author: undefined,
       language: '',
       publishedDate: '',
     },
-    // validationSchema:
 
-    // }),
     onSubmit: (values) => {
       setQueryTitle(values.title);
       setQueryAuthor(values.author);
-      console.log(values.title);
-      formik.resetForm();
     },
   });
+
   return (
     <StyledForm onSubmit={formik.handleSubmit}>
       <Form.Group>

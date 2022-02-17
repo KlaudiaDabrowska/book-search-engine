@@ -4,7 +4,7 @@ import { Book } from '../../types/Book';
 
 interface SearchResultsItemProps {
   item: Book;
-  index: string;
+  index?: string;
 }
 
 export const SearchResultsItem = ({ item, index }: SearchResultsItemProps) => {

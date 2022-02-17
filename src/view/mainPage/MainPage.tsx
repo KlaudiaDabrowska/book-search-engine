@@ -4,15 +4,11 @@ import { Header } from '../../styles/MainPage.styles';
 import { SearchBookForm } from '../form/Form';
 import { StyledCol } from '../../styles/StyledColumn.styles';
 import { SearchResultsList } from '../searchResults/SearchResultsList';
-import { useBooks } from '../../services/useBooks';
-import { useSerachTabState } from '../state/useSearchTabState';
+import { useBooksState } from '../state/useSearchTabState';
 
 export const MainPage = () => {
-  const { queryTitle, queryAuthor, setQueryTitle, setQueryAuthor } = useSerachTabState();
-  // const booksQuery = useBooks({ inauthor: queryAuthor, intitle: queryTitle });
-  const booksQuery = useBooks({});
+  const { booksQuery, setQueryTitle, setQueryAuthor } = useBooksState();
 
-  console.log(queryTitle);
   return (
     <Container fluid>
       <Row>
@@ -21,7 +17,7 @@ export const MainPage = () => {
           <SearchBookForm setQueryAuthor={setQueryAuthor} setQueryTitle={setQueryTitle} />
         </StyledCol>
         <Col lg={8}>
-          <SearchResultsList searchTitle={queryTitle} searchAuthor={queryAuthor} isLoading={booksQuery.isLoading} />
+          <SearchResultsList booksQuery={booksQuery} />
           {/* <SearchResultsList searchResult={booksQuery.data?.items ?? []} isLoading={booksQuery.isLoading} /> */}
         </Col>
       </Row>
