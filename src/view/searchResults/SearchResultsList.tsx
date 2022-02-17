@@ -6,19 +6,23 @@ import { Book } from '../../types/Book';
 import { SearchResultsItem } from './SearchResultsItem';
 
 interface SearchResultListProp {
-  searchResult: Book[] | undefined;
+  // searchResult: Book[] | undefined;
+  searchTitle: string;
+  searchAuthor: string;
   isLoading: boolean;
   // errorMessage: string | undefined;
 }
 
-export const SearchResultsList = ({ searchResult, isLoading }: SearchResultListProp) => {
-  const booksQuery = useBooks({});
+export const SearchResultsList = ({ searchTitle, searchAuthor, isLoading }: SearchResultListProp) => {
+  const booksQuery = useBooks({ intitle: searchTitle, inauthor: searchAuthor });
 
-  if (booksQuery.isLoading) {
+  if (isLoading) {
     return <span>Loading..</span>;
   }
 
-  console.log(booksQuery.data?.items);
+  console.log(booksQuery);
+  // console.log(booksQuery.data?.items);
+  console.log(searchTitle);
 
   return (
     <Wrapper>

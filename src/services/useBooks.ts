@@ -8,9 +8,10 @@ interface UseBooksProps {
   inauthor?: string;
 }
 
-export const useBooks = (props: UseBooksProps) => {
+export const useBooks = ({ inauthor, intitle }: UseBooksProps) => {
   const client = apiClient;
-  return useQuery<BooksResponse>(keys.books(), async () => client.get(`/books/v1/volumes?q=inauthor:Steve+intitle:Code`).then((res) => res.data), {
+  console.log(intitle);
+  return useQuery<BooksResponse>(keys.books(), async () => client.get(`/books/v1/volumes?q=intitle:${intitle}`).then((res) => res.data), {
     staleTime: Infinity,
   });
 };

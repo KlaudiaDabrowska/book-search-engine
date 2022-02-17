@@ -4,11 +4,11 @@ import { useFormik } from 'formik';
 import { Form } from 'react-bootstrap';
 
 interface SearchBookFormProps {
-  query: string;
-  setQuery: Dispatch<SetStateAction<string>>;
+  setQueryTitle: Dispatch<SetStateAction<string>>;
+  setQueryAuthor: Dispatch<SetStateAction<string>>;
 }
 
-export const SearchBookForm = ({ query, setQuery }: SearchBookFormProps) => {
+export const SearchBookForm = ({ setQueryAuthor, setQueryTitle }: SearchBookFormProps) => {
   const formik = useFormik({
     initialValues: {
       title: '',
@@ -20,7 +20,9 @@ export const SearchBookForm = ({ query, setQuery }: SearchBookFormProps) => {
 
     // }),
     onSubmit: (values) => {
-      setQuery(values.title);
+      setQueryTitle(values.title);
+      setQueryAuthor(values.author);
+      console.log(values.title);
       formik.resetForm();
     },
   });

@@ -10,13 +10,16 @@ interface SearchResultsItemProps {
 export const SearchResultsItem = ({ item, index }: SearchResultsItemProps) => {
   return (
     <WrapperLi>
-      <Image />
+      <Image
+        src={
+          item.volumeInfo.imageLinks
+            ? item.volumeInfo.imageLinks.thumbnail
+            : 'https://cdn.pixabay.com/photo/2016/10/03/03/00/camera-1710849_960_720.png'
+        }
+      />
       <Title>{item.volumeInfo.title}</Title>
-      {/* <Author>Stephan King</Author>
-      <Description>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ultricies leo
-        integer malesuada nunc vel risus commodo viverra maecenas. Duis tristique sollicitudin nibh sit amet commodo nulla facilisi nullam.
-      </Description> */}
+      <Author>{item.volumeInfo.authors}</Author>
+      <Description>{item.volumeInfo.description}</Description>
     </WrapperLi>
   );
 };

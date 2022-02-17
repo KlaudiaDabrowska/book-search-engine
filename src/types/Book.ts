@@ -1,5 +1,6 @@
 type BookId = string;
 type Author = string;
+type Image = string;
 
 export interface BooksResponse {
   kind: string;
@@ -20,4 +21,10 @@ export interface VolumeInfo {
   authors: Author[];
   publishedDate: Date;
   description: string;
+  imageLinks?: ImageLinks;
+}
+
+export interface ImageLinks {
+  smallThumbnail: string;
+  thumbnail: Image;
 }
