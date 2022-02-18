@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useEffect } from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import { StyledLabel, StyledInput, StyledForm, StyledButton } from '../../styles/Form.styles';
 import { useFormik } from 'formik';
 import { Form } from 'react-bootstrap';
@@ -11,8 +11,8 @@ interface SearchBookFormProps {
 export const SearchBookForm = ({ setQueryAuthor, setQueryTitle }: SearchBookFormProps) => {
   const formik = useFormik({
     initialValues: {
-      title: undefined,
-      author: undefined,
+      title: '',
+      author: '',
       language: '',
       publishedDate: '',
     },
@@ -34,7 +34,6 @@ export const SearchBookForm = ({ setQueryAuthor, setQueryTitle }: SearchBookForm
             onChange={formik.handleChange}
             value={formik.values.title}
             onBlur={formik.handleBlur}
-            // isInvalid={formik.values.title && !!formik.values.title}
             placeholder="Title"
           />
         </StyledLabel>
@@ -46,7 +45,6 @@ export const SearchBookForm = ({ setQueryAuthor, setQueryTitle }: SearchBookForm
             onChange={formik.handleChange}
             value={formik.values.author}
             onBlur={formik.handleBlur}
-            // isInvalid={formik.values.title && !!formik.values.title}
             placeholder="Author"
           />
         </StyledLabel>
@@ -58,7 +56,6 @@ export const SearchBookForm = ({ setQueryAuthor, setQueryTitle }: SearchBookForm
             onChange={formik.handleChange}
             value={formik.values.language}
             onBlur={formik.handleBlur}
-            // isInvalid={formik.values.title && !!formik.values.title}
             placeholder="Language"
           />
         </StyledLabel>
@@ -70,12 +67,9 @@ export const SearchBookForm = ({ setQueryAuthor, setQueryTitle }: SearchBookForm
             onChange={formik.handleChange}
             value={formik.values.publishedDate}
             onBlur={formik.handleBlur}
-            // isInvalid={formik.values.title && !!formik.values.title}
             placeholder="Date of publiaction"
           />
         </StyledLabel>
-
-        {/* {formik.values.title && formik.values.title ? <div>{formik.values.title}</div> : null} */}
       </Form.Group>
 
       <StyledButton variant="primary" type="submit" size="sm">

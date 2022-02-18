@@ -1,4 +1,4 @@
-import { useQuery } from 'react-query';
+import { useInfiniteQuery } from 'react-query';
 import { apiClient } from '../config/ApiClient';
 import { BooksResponse } from '../types/Book';
 
@@ -13,8 +13,17 @@ export interface FullTextSearchQuery {
 
 export const useBooks = (params: UseBooksProps) => {
   const client = apiClient;
+  const maxResults = 4;
 
-  return useQuery<BooksResponse>([params], async () => client.get(`/books/v1/volumes?${buildQueryParams(params)}`).then((res) => res.data), {
+  const fetchBooks = async ({ pageParam = 0 }) => {
+    return client.get(`/books/v1/volumes?${buildQueryParams(params)}&startIndex=${pageParam}&maxResults=${maxResults}`).then((res) => res.data);
+  };
+
+  return useInfiniteQuery<BooksResponse>([params], fetchBooks, {
+    getNextPageParam: (lastPage, pages) => {
+      const fetchedItemsCount = pages.flatMap((page) => page.items).length;
+      return lastPage.totalItems > fetchedItemsCount ? fetchedItemsCount : null;
+    },
     retry: 1,
   });
 };

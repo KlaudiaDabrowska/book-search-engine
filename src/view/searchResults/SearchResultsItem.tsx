@@ -7,7 +7,7 @@ interface SearchResultsItemProps {
   index?: string;
 }
 
-export const SearchResultsItem = ({ item, index }: SearchResultsItemProps) => {
+export const SearchResultsItem = ({ item }: SearchResultsItemProps) => {
   return (
     <WrapperLi>
       <Image

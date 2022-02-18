@@ -1,12 +1,12 @@
 import React from 'react';
-import { UseQueryResult } from 'react-query';
-import { Author, Description, Image, Title, WrapperLi } from '../../styles/SearchResultsItem.styles';
+import InfiniteScroll from 'react-infinite-scroller';
+import { UseInfiniteQueryResult } from 'react-query';
 import { Wrapper } from '../../styles/SearchResultsList.styles';
-import { Book, BooksResponse } from '../../types/Book';
+import { BooksResponse } from '../../types/Book';
 import { SearchResultsItem } from './SearchResultsItem';
 
 interface SearchResultListProp {
-  booksQuery: UseQueryResult<BooksResponse, unknown>;
+  booksQuery: UseInfiniteQueryResult<BooksResponse, unknown>;
 }
 
 export const SearchResultsList = ({ booksQuery }: SearchResultListProp) => {
@@ -16,21 +16,11 @@ export const SearchResultsList = ({ booksQuery }: SearchResultListProp) => {
 
   return (
     <Wrapper>
-      {(booksQuery.data?.items ?? []).map((book) => (
-        <SearchResultsItem item={book} index={book.id} />
-      ))}
-
-      {/* {searchTitle != '' ? (booksQuery.data?.items ?? []).map((book) => <SearchResultsItem item={book} index={book.id} />) : <div>"hehe</div>} */}
-      {/* <Image />
-        <Title>The Shining</Title>
-        <Author>Stephan King</Author>
-        <Description>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ultricies leo
-          integer malesuada nunc vel risus commodo viverra maecenas. Duis tristique sollicitudin nibh sit amet commodo nulla facilisi nullam.
-        </Description> */}
-      {/* {Object.keys(searchResult).map((item: any, index: number) => (
-        <SearchResultsItem item={item} index={index + 1} />
-      ))} */}
+      <InfiniteScroll hasMore={booksQuery.hasNextPage} loadMore={() => booksQuery.fetchNextPage()}>
+        {(booksQuery.data?.pages?.flatMap((page) => page.items) ?? []).map((book) => (
+          <SearchResultsItem item={book} key={book.id} />
+        ))}
+      </InfiniteScroll>
     </Wrapper>
   );
 };
