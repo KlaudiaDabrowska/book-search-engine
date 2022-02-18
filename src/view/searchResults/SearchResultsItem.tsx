@@ -1,5 +1,5 @@
 import React from 'react';
-import { Author, Description, Title, WrapperLi, Image } from '../../styles/SearchResultsItem.styles';
+import { Author, Description, Title, WrapperItem, Image } from '../../styles/SearchResultsItem.styles';
 import { Book } from '../../types/Book';
 
 interface SearchResultsItemProps {
@@ -8,8 +8,29 @@ interface SearchResultsItemProps {
 }
 
 export const SearchResultsItem = ({ item }: SearchResultsItemProps) => {
+  const trimmedFn = () => {
+    const description = item.volumeInfo.description;
+    const maxLength = 300;
+
+    if (description) {
+      const trimmedDescription = description.substring(0, maxLength);
+      const shortDescription = trimmedDescription.substring(0, Math.min(trimmedDescription.length, trimmedDescription.lastIndexOf(' ')));
+      return shortDescription;
+    } else {
+      return 'description not found';
+    }
+  };
+
+  const findAuthors = () => {
+    if (item.volumeInfo.authors) {
+      const separateAuthors = item.volumeInfo.authors.toString().replace(',', ' & ');
+      return separateAuthors;
+    } else {
+      return null;
+    }
+  };
   return (
-    <WrapperLi>
+    <WrapperItem>
       <Image
         src={
           item.volumeInfo.imageLinks
@@ -18,8 +39,8 @@ export const SearchResultsItem = ({ item }: SearchResultsItemProps) => {
         }
       />
       <Title>{item.volumeInfo.title}</Title>
-      <Author>{item.volumeInfo.authors}</Author>
-      <Description>{item.volumeInfo.description}</Description>
-    </WrapperLi>
+      <Author>{findAuthors()}</Author>
+      <Description>{trimmedFn()}</Description>
+    </WrapperItem>
   );
 };

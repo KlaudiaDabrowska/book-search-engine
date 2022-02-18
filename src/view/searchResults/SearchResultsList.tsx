@@ -1,7 +1,7 @@
 import React from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
 import { UseInfiniteQueryResult } from 'react-query';
-import { Wrapper } from '../../styles/SearchResultsList.styles';
+import { Loader, Wrapper, ErrorMessage, WrapperErrorMessage } from '../../styles/SearchResultsList.styles';
 import { BooksResponse } from '../../types/Book';
 import { SearchResultsItem } from './SearchResultsItem';
 
@@ -10,11 +10,13 @@ interface SearchResultListProp {
 }
 
 export const SearchResultsList = ({ booksQuery }: SearchResultListProp) => {
-  if (booksQuery.isLoading) {
-    return <span>Loading..</span>;
-  }
-
-  return (
+  return booksQuery.isLoading ? (
+    <Loader animation="border" variant="light" />
+  ) : booksQuery.isError ? (
+    <WrapperErrorMessage>
+      <ErrorMessage>Book not found</ErrorMessage>
+    </WrapperErrorMessage>
+  ) : (
     <Wrapper>
       <InfiniteScroll hasMore={booksQuery.hasNextPage} loadMore={() => booksQuery.fetchNextPage()}>
         {(booksQuery.data?.pages?.flatMap((page) => page.items) ?? []).map((book) => (

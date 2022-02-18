@@ -9,6 +9,7 @@ export interface UseBooksProps {
 export interface FullTextSearchQuery {
   intitle?: string;
   inauthor?: string;
+  isbn?: string;
 }
 
 export const useBooks = (params: UseBooksProps) => {
@@ -25,6 +26,7 @@ export const useBooks = (params: UseBooksProps) => {
       return lastPage.totalItems > fetchedItemsCount ? fetchedItemsCount : null;
     },
     retry: 1,
+    enabled: !!params.q.inauthor || !!params.q.intitle || !!params.q.isbn,
   });
 };
 

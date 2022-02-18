@@ -9,5 +9,6 @@ export const StyledCol = styled(Col)`
     border-bottom: 2px solid rgba(255, 255, 255, 0.5);
     border-right: none;
     padding-right: 0px;
+    height: 70vh;
   }
 `;
