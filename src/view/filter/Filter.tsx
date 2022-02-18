@@ -1,25 +1,26 @@
 import React, { Dispatch, SetStateAction } from 'react';
-import { StyledLabel, StyledInput, StyledForm, StyledButton } from '../../styles/Form.styles';
+import { StyledLabel, StyledInput, StyledForm, StyledButton } from '../../styles/Filter.styles';
 import { useFormik } from 'formik';
 import { Form } from 'react-bootstrap';
 
 interface SearchBookFormProps {
   setQueryTitle: Dispatch<SetStateAction<string | undefined>>;
   setQueryAuthor: Dispatch<SetStateAction<string | undefined>>;
+  setQueryISBN: Dispatch<SetStateAction<string | undefined>>;
 }
 
-export const SearchBookForm = ({ setQueryAuthor, setQueryTitle }: SearchBookFormProps) => {
+export const SearchBookFilter = ({ setQueryAuthor, setQueryTitle, setQueryISBN }: SearchBookFormProps) => {
   const formik = useFormik({
     initialValues: {
       title: '',
       author: '',
-      language: '',
-      publishedDate: '',
+      isbn: '',
     },
 
     onSubmit: (values) => {
       setQueryTitle(values.title);
       setQueryAuthor(values.author);
+      setQueryISBN(values.isbn);
     },
   });
 
@@ -48,26 +49,15 @@ export const SearchBookForm = ({ setQueryAuthor, setQueryTitle }: SearchBookForm
             placeholder="Author"
           />
         </StyledLabel>
-        <StyledLabel label="Language">
+        <StyledLabel label="ISBN">
           <StyledInput
-            id="language"
-            name="language"
-            type="language"
+            id="isbn"
+            name="isbn"
+            type="isbn"
             onChange={formik.handleChange}
-            value={formik.values.language}
+            value={formik.values.isbn}
             onBlur={formik.handleBlur}
-            placeholder="Language"
-          />
-        </StyledLabel>
-        <StyledLabel label="Date of publication">
-          <StyledInput
-            id="publishedDate"
-            name="publishedDate"
-            type="publishedDate"
-            onChange={formik.handleChange}
-            value={formik.values.publishedDate}
-            onBlur={formik.handleBlur}
-            placeholder="Date of publiaction"
+            placeholder="isbn"
           />
         </StyledLabel>
       </Form.Group>

@@ -4,16 +4,15 @@ interface ImageProps {
   src: string;
 }
 
-export const WrapperLi = styled.li`
+export const WrapperItem = styled.li`
   display: grid;
   grid-template-columns: 0.6fr 1.4fr 1fr;
   grid-template-rows: 0.5fr 0.5fr 2fr;
-  gap: 0px 20px;
+  gap: 0px 0px;
   grid-template-areas:
     'image title title'
     'image author author'
     'image description description';
-  width: 100%;
   margin-bottom: ${({ theme }) => theme.spacing.m};
   background-color: ${({ theme }) => theme.colors.backgroundColor};
   border: 2px solid black;
@@ -27,7 +26,10 @@ export const WrapperLi = styled.li`
 export const Description = styled.div`
   grid-area: description;
   margin: 20px 20px 20px 0;
-  text-align: justify;
+  text-align: center;
+  color: #453750;
+  font-weight: bold;
+  font-style: italic;
   @media (max-width: 1115px) {
     margin-top: ${({ theme }) => theme.spacing.s};
   }
@@ -41,8 +43,8 @@ export const Description = styled.div`
 `;
 
 export const Image = styled.div<ImageProps>`
-  width: 128px;
-  height: 180px;
+  width: 120px;
+  height: 150px;
   grid-area: image;
   align-self: center;
   justify-content: center;
@@ -70,6 +72,7 @@ export const Image = styled.div<ImageProps>`
 
 export const Title = styled.h3`
   font-size: ${({ theme }) => theme.fontSize.l};
+  font-weight: bold;
   grid-area: title;
   margin-top: ${({ theme }) => theme.spacing.s};
   margin-bottom: ${({ theme }) => theme.spacing.xs};
@@ -84,7 +87,6 @@ export const Author = styled.p`
   margin: 0 auto;
   color: black;
   font-size: ${({ theme }) => theme.fontSize.s};
-  font-style: italic;
   text-align: center;
   grid-area: author;
   @media (max-width: 580px) {
