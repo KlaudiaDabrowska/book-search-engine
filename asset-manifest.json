@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/KlaudiaDabrowska/recruitment-task-stx/static/css/main.56e6221f.css",
+    "main.js": "/KlaudiaDabrowska/recruitment-task-stx/static/js/main.3f7d3263.js",
+    "static/media/books.jpg": "/KlaudiaDabrowska/recruitment-task-stx/static/media/books.e33f1f0073820dc65b16.jpg",
+    "index.html": "/KlaudiaDabrowska/recruitment-task-stx/index.html",
+    "main.56e6221f.css.map": "/KlaudiaDabrowska/recruitment-task-stx/static/css/main.56e6221f.css.map",
+    "main.3f7d3263.js.map": "/KlaudiaDabrowska/recruitment-task-stx/static/js/main.3f7d3263.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.56e6221f.css",
+    "static/js/main.3f7d3263.js"
+  ]
+}
