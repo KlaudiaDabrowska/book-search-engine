@@ -35,3 +35,5 @@ Open [http://localhost:3000]
 ---
 
 #### Live
+
+https://klaudiadabrowska.github.io/recruitment-task-stx/

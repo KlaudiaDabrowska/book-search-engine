@@ -4,7 +4,6 @@ import { defaultImageUrl } from './defaultValues';
 
 interface SearchResultsItemProps {
   item: Book;
-  index?: string;
 }
 
 export const SearchResultsItem = ({ item }: SearchResultsItemProps) => {

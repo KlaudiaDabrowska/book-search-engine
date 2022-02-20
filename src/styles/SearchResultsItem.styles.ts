@@ -44,15 +44,13 @@ export const Description = styled.div`
 `;
 
 export const Image = styled.img<ImageProps>`
-  width: 125px;
-  height: 130px;
+  width: 130px;
+  height: 150px;
   grid-area: image;
   align-self: center;
   justify-content: center;
   background-image: ${({ src }) => `url(${src})`};
   background-position: center;
-  /* background-size: contain;
-  background-repeat: no-repeat; */
   margin-left: ${({ theme }) => theme.spacing.l};
   margin-right: ${({ theme }) => theme.spacing.s};
 
@@ -60,12 +58,12 @@ export const Image = styled.img<ImageProps>`
     margin-left: ${({ theme }) => theme.spacing.m};
   }
   @media (max-width: 1070px) {
-    width: 110px;
-    height: 110px;
+    width: 120px;
+    height: 130px;
   }
   @media (max-width: 414px) {
     width: 90px;
-    height: 90px;
+    height: 100px;
     margin-top: ${({ theme }) => theme.spacing.m};
     margin-bottom: ${({ theme }) => theme.spacing.xs};
   }
