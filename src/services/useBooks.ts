@@ -1,20 +1,15 @@
 import { useInfiniteQuery } from 'react-query';
 import { apiClient } from '../config/ApiClient';
 import { BooksResponse } from '../types/Book';
+import { BooksFilters } from '../view/state/useBooksState';
 
 export interface UseBooksProps {
-  q: FullTextSearchQuery;
-}
-
-export interface FullTextSearchQuery {
-  intitle?: string;
-  inauthor?: string;
-  isbn?: string;
+  q: BooksFilters;
 }
 
 export const useBooks = (params: UseBooksProps) => {
   const client = apiClient;
-  const maxResults = 4;
+  const maxResults = 6;
 
   const fetchBooks = async ({ pageParam = 0 }) => {
     return client.get(`/books/v1/volumes?${buildQueryParams(params)}&startIndex=${pageParam}&maxResults=${maxResults}`).then((res) => res.data);
@@ -23,10 +18,11 @@ export const useBooks = (params: UseBooksProps) => {
   return useInfiniteQuery<BooksResponse>([params], fetchBooks, {
     getNextPageParam: (lastPage, pages) => {
       const fetchedItemsCount = pages.flatMap((page) => page.items).length;
+
       return lastPage.totalItems > fetchedItemsCount ? fetchedItemsCount : null;
     },
     retry: 1,
-    enabled: !!params.q.inauthor || !!params.q.intitle || !!params.q.isbn,
+    enabled: Object.values(params.q).some((value) => !!value),
   });
 };
 
@@ -38,7 +34,7 @@ const buildQueryParams = (queryParams: UseBooksProps) => {
     .join('&');
 };
 
-const buildFullTextSearchQueryParam = (fullTextSearchQueryParams: FullTextSearchQuery) => {
+const buildFullTextSearchQueryParam = (fullTextSearchQueryParams: BooksFilters) => {
   return Object.entries(fullTextSearchQueryParams)
     .filter(([_, value]) => !!value)
     .map(([key, value]) => `${key}:${value}`)

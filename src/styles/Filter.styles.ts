@@ -63,3 +63,8 @@ export const StyledButton = styled(Button)`
     margin-top: ${({ theme }) => theme.spacing.xs};
   }
 `;
+
+export const Alert = styled.div`
+  color: ${({ theme }) => theme.colors.alertColor};
+  font-size: ${({ theme }) => theme.fontSize.xs};
+`;

@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 interface ImageProps {
   src: string;
+  alt: string;
 }
 
 export const WrapperItem = styled.li`
@@ -42,16 +43,16 @@ export const Description = styled.div`
   }
 `;
 
-export const Image = styled.div<ImageProps>`
-  width: 120px;
-  height: 150px;
+export const Image = styled.img<ImageProps>`
+  width: 125px;
+  height: 130px;
   grid-area: image;
   align-self: center;
   justify-content: center;
   background-image: ${({ src }) => `url(${src})`};
   background-position: center;
-  background-size: contain;
-  background-repeat: no-repeat;
+  /* background-size: contain;
+  background-repeat: no-repeat; */
   margin-left: ${({ theme }) => theme.spacing.l};
   margin-right: ${({ theme }) => theme.spacing.s};
 

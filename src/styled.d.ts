@@ -5,6 +5,7 @@ declare module 'styled-components' {
     colors: {
       backgroundColor: string;
       borderColor: string;
+      alertColor: string;
     };
     fontSize: {
       xl: string;

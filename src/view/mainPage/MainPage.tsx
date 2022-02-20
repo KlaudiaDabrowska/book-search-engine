@@ -7,14 +7,14 @@ import { SearchResultsList } from '../searchResults/SearchResultsList';
 import { useBooksState } from '../state/useBooksState';
 
 export const MainPage = () => {
-  const { booksQuery, setQueryTitle, setQueryAuthor, setQueryISBN } = useBooksState();
+  const { booksQuery, setFilters } = useBooksState();
 
   return (
     <Container fluid>
       <Row>
         <Header> Your bookshelf </Header>
         <StyledCol lg={4}>
-          <SearchBookFilter setQueryAuthor={setQueryAuthor} setQueryTitle={setQueryTitle} setQueryISBN={setQueryISBN} />
+          <SearchBookFilter setFilters={setFilters} />
         </StyledCol>
         <Col lg={8}>
           <SearchResultsList booksQuery={booksQuery} />

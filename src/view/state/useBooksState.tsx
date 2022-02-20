@@ -1,11 +1,16 @@
 import { useState } from 'react';
 import { useBooks } from '../../services/useBooks';
 
-export const useBooksState = () => {
-  const [queryTitle, setQueryTitle] = useState<string>();
-  const [queryAuthor, setQueryAuthor] = useState<string>();
-  const [queryISBN, setQueryISBN] = useState<string>();
-  const booksQuery = useBooks({ q: { intitle: queryTitle, inauthor: queryAuthor, isbn: queryISBN } });
+export interface BooksFilters {
+  intitle?: string;
+  inauthor?: string;
+  isbn?: string;
+}
 
-  return { booksQuery, setQueryAuthor, setQueryTitle, setQueryISBN };
+export const useBooksState = () => {
+  const [filters, setFilters] = useState<BooksFilters>({});
+
+  const booksQuery = useBooks({ q: filters });
+
+  return { booksQuery, setFilters };
 };

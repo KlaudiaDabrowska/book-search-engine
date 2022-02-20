@@ -1,26 +1,30 @@
 import React, { Dispatch, SetStateAction } from 'react';
-import { StyledLabel, StyledInput, StyledForm, StyledButton } from '../../styles/Filter.styles';
+import { StyledLabel, StyledInput, StyledForm, StyledButton, Alert } from '../../styles/Filter.styles';
 import { useFormik } from 'formik';
 import { Form } from 'react-bootstrap';
+import * as Yup from 'yup';
+import { BooksFilters } from '../state/useBooksState';
 
 interface SearchBookFormProps {
-  setQueryTitle: Dispatch<SetStateAction<string | undefined>>;
-  setQueryAuthor: Dispatch<SetStateAction<string | undefined>>;
-  setQueryISBN: Dispatch<SetStateAction<string | undefined>>;
+  setFilters: Dispatch<SetStateAction<BooksFilters>>;
 }
 
-export const SearchBookFilter = ({ setQueryAuthor, setQueryTitle, setQueryISBN }: SearchBookFormProps) => {
+export const SearchBookFilter = ({ setFilters }: SearchBookFormProps) => {
   const formik = useFormik({
     initialValues: {
       title: '',
       author: '',
       isbn: '',
     },
-
+    validationSchema: Yup.object({
+      isbn: Yup.string().min(10, 'ISBN: min 10 numbers').max(13, 'ISBN: max 13 numbers'),
+    }),
     onSubmit: (values) => {
-      setQueryTitle(values.title);
-      setQueryAuthor(values.author);
-      setQueryISBN(values.isbn);
+      setFilters({
+        inauthor: values.author,
+        intitle: values.title,
+        isbn: values.isbn,
+      });
     },
   });
 
@@ -60,6 +64,7 @@ export const SearchBookFilter = ({ setQueryAuthor, setQueryTitle, setQueryISBN }
             placeholder="isbn"
           />
         </StyledLabel>
+        {formik.touched.isbn && formik.errors.isbn ? <Alert>{formik.errors.isbn}</Alert> : null}
       </Form.Group>
 
       <StyledButton variant="primary" type="submit" size="sm">

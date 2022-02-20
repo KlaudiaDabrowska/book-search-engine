@@ -5,7 +5,7 @@ type Image = string;
 export interface BooksResponse {
   kind: string;
   totalItems: number;
-  items: Book[];
+  items?: Book[];
 }
 
 export interface Book {
@@ -17,14 +17,14 @@ export interface Book {
 
 export interface VolumeInfo {
   title: string;
-  subtitle: string;
-  authors: Author[];
-  publishedDate: Date;
-  description: string;
+  subtitle?: string;
+  authors?: Author[];
+  publishedDate?: Date;
+  description?: string;
   imageLinks?: ImageLinks;
 }
 
 export interface ImageLinks {
-  smallThumbnail: string;
-  thumbnail: Image;
+  smallThumbnail?: string;
+  thumbnail?: Image;
 }
