@@ -29,7 +29,7 @@ export const StyledInput = styled(Form.Control)`
   width: 100%;
   height: 55px;
   background-color: transparent;
-  color: black;
+  color: ${({ theme }) => theme.colors.blackColor};
   border: none;
   border-bottom: 2px solid ${({ theme }) => theme.colors.borderColor};
   font-weight: 500;

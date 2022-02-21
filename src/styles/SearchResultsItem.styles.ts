@@ -16,7 +16,7 @@ export const WrapperItem = styled.li`
     'image description description';
   margin-bottom: ${({ theme }) => theme.spacing.m};
   background-color: ${({ theme }) => theme.colors.backgroundColor};
-  border: 2px solid black;
+  border: 2px solid ${({ theme }) => theme.colors.blackColor};
   border-radius: 20px;
   @media (max-width: 414px) {
     display: flex;
@@ -28,7 +28,7 @@ export const Description = styled.div`
   grid-area: description;
   margin: 20px 20px 20px 0;
   text-align: center;
-  color: #453750;
+  color: ${({ theme }) => theme.colors.borderColor};
   font-weight: bold;
   font-style: italic;
   @media (max-width: 1115px) {
@@ -59,11 +59,11 @@ export const Image = styled.img<ImageProps>`
   }
   @media (max-width: 1070px) {
     width: 120px;
-    height: 130px;
+    height: 140px;
   }
   @media (max-width: 414px) {
-    width: 90px;
-    height: 100px;
+    width: 100px;
+    height: 120px;
     margin-top: ${({ theme }) => theme.spacing.m};
     margin-bottom: ${({ theme }) => theme.spacing.xs};
   }
@@ -84,7 +84,7 @@ export const Title = styled.h3`
 
 export const Author = styled.p`
   margin: 0 auto;
-  color: black;
+  color: ${({ theme }) => theme.colors.blackColor};
   font-size: ${({ theme }) => theme.fontSize.s};
   text-align: center;
   grid-area: author;

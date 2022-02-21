@@ -5,6 +5,7 @@ export const theme: DefaultTheme = {
     backgroundColor: 'rgba(255, 255, 255, 0.8)',
     borderColor: '#453750',
     alertColor: '#A64452',
+    blackColor: '#000000',
   },
   fontSize: {
     xl: '3.125rem', //50px;

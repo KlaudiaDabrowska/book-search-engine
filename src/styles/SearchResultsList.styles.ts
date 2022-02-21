@@ -17,7 +17,7 @@ export const Loader = styled(Spinner)`
 
 export const ErrorMessage = styled.h2`
   margin-top: 15px;
-  color: black;
+  color: ${({ theme }) => theme.colors.blackColor};
 `;
 
 export const WrapperErrorMessage = styled.div`
@@ -26,7 +26,7 @@ export const WrapperErrorMessage = styled.div`
   position: relative;
   top: 36%;
   background-color: ${({ theme }) => theme.colors.backgroundColor};
-  border: 2px solid black;
+  border: 2px solid ${({ theme }) => theme.colors.blackColor};
   border-radius: 20px;
   @media (max-width: 992px) {
     height: 100%;
